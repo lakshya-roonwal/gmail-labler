@@ -1,11 +1,9 @@
-import { Button } from "@/components/ui/button"
+import LabelerPage from "@/components/LabelerPage"
+
 
 const GamilLabler = () => {
   return (
-    <div>
-      GamilLabler
-      <Button>Hello World</Button>
-    </div>
+    <LabelerPage/>
   )
 }
 

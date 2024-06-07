@@ -4,7 +4,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="w-full px-8">
+    <main className="w-full px-8 flex justify-center">
       {children}
     </main>
   );
