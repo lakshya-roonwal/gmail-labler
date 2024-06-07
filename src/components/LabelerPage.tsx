@@ -9,7 +9,7 @@ interface LabelerPageProps {
 }
 
 const LabelerPage: FC<LabelerPageProps> = ({}) => {
-  return <div className='border-2 w-full max-w-5xl p-8'>
+  return <div className='w-full max-w-5xl p-8'>
     <UserInfo/>
     <Mails/>
   </div>
