@@ -23,6 +23,7 @@ const Mails: FC<MailsProps> = ({}) => {
     <div className="mt-8">
       {/* Mail Selection Section */}
       <div className="flex w-full justify-between">
+        <div className="flex gap-2">
         <Select>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="No. of Email" />
@@ -35,6 +36,8 @@ const Mails: FC<MailsProps> = ({}) => {
             <SelectItem value="25">25</SelectItem>
           </SelectContent>
         </Select>
+        <Button>Fetch Emails</Button>
+        </div>
 
         <Button>Classify</Button>
       </div>
