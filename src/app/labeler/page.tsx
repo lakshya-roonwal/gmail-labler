@@ -1,9 +1,13 @@
+import { auth, EnrichedSession } from '@/auth';
 import LabelerPage from "@/components/LabelerPage"
+import { User } from '@/types';
 
 
-const GamilLabler = () => {
+const GamilLabler = async() => {
+  const session = (await auth()) as EnrichedSession;
+  const user=session?.user;
   return (
-    <LabelerPage/>
+    <LabelerPage user={user}/>
   )
 }
 

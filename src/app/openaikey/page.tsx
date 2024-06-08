@@ -1,3 +1,4 @@
+"use client"
 import { FC } from "react";
 import {
   Card,
@@ -7,13 +8,15 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 
 interface pageProps {}
 
 const page: FC<pageProps> = ({}) => {
+  const submitKey=()=>{
+
+  }
   return (
     <div className="flex justify-center items-center min-h-screen">
       <Card className="mx-auto max-w-sm">

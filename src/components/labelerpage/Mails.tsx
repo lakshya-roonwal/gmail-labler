@@ -10,15 +10,21 @@ import { Button } from "../ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge"
 
-interface MailsProps {}
+interface MailsProps {
+  mails: {
+    subject: string;
+    body: string;
+    classification:string;
+  }[];
+}
 
-const Mails: FC<MailsProps> = ({}) => {
+const Mails: FC<MailsProps> = ({mails}) => {
+  console.log(mails)
   return (
     <div className="mt-8">
       {/* Mail Selection Section */}
@@ -44,23 +50,22 @@ const Mails: FC<MailsProps> = ({}) => {
 
       {/* Mails Section */}
       <div className="w-full flex flex-col gap-4 mt-8">
-        {[1,2,3].map((number)=>(
-          <Card className="w-full">
+        {mails.map((mail)=>(
+          <Card className="w-full max-h-[200px] overflow-hidden">
             <div className="flex items-center justify-between">
             <CardHeader>
               <div className="">
-              <CardTitle>Create project</CardTitle>
-              <CardDescription>
-                Deploy your new project in one-click.
-              </CardDescription>
+              <CardTitle>{mail.subject}</CardTitle>
               </div>
             </CardHeader>
             <div className="px-4">
-            <Badge>Badge</Badge>
+            <Badge>{mail.classification}</Badge>
             </div>
             </div>
             <CardContent>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, consequuntur provident rerum ipsa nostrum mollitia incidunt doloremque in repudiandae, quibusdam hic porro iusto! Doloremque alias adipisci, ipsam ratione ipsa atque.
+              <p style={{ whiteSpace: 'pre-line' }}>
+              {mail.body}
+              </p>
             </CardContent>
           </Card>
         ))}
