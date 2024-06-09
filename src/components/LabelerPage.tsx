@@ -13,14 +13,6 @@ const LabelerPage: FC<LabelerPageProps> = ({user}) => {
   const [mails, setMails] = useState(JSON.parse(localStorage.getItem('emails') as any))
 
   const classifyEmails = async () => {
-    const apiKey = localStorage.getItem('openaikey');
-
-    if (!apiKey) {
-      console.error("API key not found in localStorage");
-      return;
-    }
-    console.log(typeof(apiKey))
-
     try {
       const response = await fetch("/api/classifyemails", {
         method: "POST",
