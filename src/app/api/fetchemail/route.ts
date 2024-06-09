@@ -16,16 +16,16 @@ async function getMessage(auth, messageId) {
   });
 
   const message = res.data;
-  const headers = message.payload.headers;
-  const subjectHeader = headers.find(header => header.name === 'Subject');
+  const headers = message?.payload?.headers;
+  const subjectHeader = headers?.find(header => header.name === 'Subject');
   const subject = subjectHeader ? subjectHeader.value : '(No Subject)';
 
-  const parts = message.payload.parts;
+  const parts = message?.payload?.parts;
   let body = '';
   if (parts && parts.length) {
       body = getBody(parts);
   } else {
-      body = message.payload.body.data;
+      body = message?.payload?.body?.data;
   }
 
   // Decode base64 content
@@ -58,7 +58,11 @@ function getBody(parts) {
 }
 
 export async function GET(request: Request) {
+
+  const {searchParams} = new URL(request.url);
+  const emailno = searchParams.get("emailno");
   const session = (await auth()) as EnrichedSession;
+
 
   console.log('Session inside the route ', session);
 
@@ -92,7 +96,7 @@ export async function GET(request: Request) {
   // Use the Google Calendar API to access the calendar
   const gmailRes = await gmail.users.messages.list({
     userId: 'me',
-    maxResults: 10,
+    maxResults: Number(emailno),
     q: 'in:inbox',
   });
 

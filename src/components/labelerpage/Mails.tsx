@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import {
   Select,
   SelectContent,
@@ -21,16 +21,22 @@ interface MailsProps {
     body: string;
     classification:string;
   }[];
+  classifyEmails():void;
+  fetchMessages:(val:any)=>void;
 }
 
-const Mails: FC<MailsProps> = ({mails}) => {
-  console.log(mails)
+const Mails: FC<MailsProps> = ({mails,classifyEmails,fetchMessages}) => {
+
+  const [emailsNo, setEmailsNo] = useState("5");
+
+
+  console.log("no of emails : ",emailsNo)
   return (
     <div className="mt-8">
       {/* Mail Selection Section */}
       <div className="flex w-full justify-between">
         <div className="flex gap-2">
-        <Select>
+        <Select onValueChange={setEmailsNo}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="No. of Email" />
           </SelectTrigger>
@@ -42,15 +48,15 @@ const Mails: FC<MailsProps> = ({mails}) => {
             <SelectItem value="25">25</SelectItem>
           </SelectContent>
         </Select>
-        <Button>Fetch Emails</Button>
+        <Button onClick={()=>{fetchMessages(emailsNo)}}>Fetch Emails</Button>
         </div>
+        <Button onClick={classifyEmails}>Classify Emails</Button>
 
-        <Button>Classify</Button>
       </div>
 
       {/* Mails Section */}
       <div className="w-full flex flex-col gap-4 mt-8">
-        {mails.map((mail)=>(
+        {mails?.map((mail)=>(
           <Card className="w-full max-h-[200px] overflow-hidden">
             <div className="flex items-center justify-between">
             <CardHeader>
