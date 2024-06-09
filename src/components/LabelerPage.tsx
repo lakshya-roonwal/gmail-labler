@@ -37,6 +37,7 @@ const LabelerPage: FC<LabelerPageProps> = ({user}) => {
       const data = await response.json();
       console.log(data);
       setMails(data.classifiedEmails)
+      localStorage.setItem("emails",JSON.stringify(data.classifiedEmails))
     } catch (error) {
       console.error("Error classifying emails:", error);
     }
@@ -69,7 +70,7 @@ const LabelerPage: FC<LabelerPageProps> = ({user}) => {
 
   return <div className='w-full max-w-5xl p-8'>
     <UserInfo user={user}/>
-    <Mails mails={mails} classifyEmails={classifyEmails} fetchMessages={fetchMessages} setMails={setMails}/>
+    <Mails mails={mails} classifyEmails={classifyEmails} fetchMessages={fetchMessages}/>
   </div>
 }
 
