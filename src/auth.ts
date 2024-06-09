@@ -5,9 +5,6 @@ import type { NextAuthConfig, Session } from 'next-auth';
 
 export const config = {
   secret:"secret",
-  pages:{
-    newUser:"/openaikey"
-  },
   providers: [
     Google({
       authorization: {

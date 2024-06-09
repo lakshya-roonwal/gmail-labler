@@ -20,7 +20,7 @@ async function getMessage(auth:any, messageId:string) {
   if (parts && parts.length) {
       body = getBody(parts);
   } else {
-      body = message?.payload?.body?.data;
+      body = message?.payload?.body?.data as string;
   }
 
   // Decode base64 content
@@ -86,7 +86,7 @@ export async function GET(request: Request) {
   const messagesWithBody = [];
 
   // Use for...of loop to handle asynchronous operations
-  for (const message of messages) {
+  for (const message of messages as any) {
       try {
           const messageDetails = await getMessage(oauth2Client, message.id as string);
           messagesWithBody.push(messageDetails);

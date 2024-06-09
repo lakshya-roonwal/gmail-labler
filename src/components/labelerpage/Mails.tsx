@@ -22,6 +22,7 @@ interface MailsProps {
   mails: {
     subject: string;
     body: string;
+    id:number;
     classification: string;
   }[];
   classifyEmails(): void;
@@ -63,7 +64,7 @@ const Mails: FC<MailsProps> = ({ mails, classifyEmails, fetchMessages }) => {
       {/* Mails Section */}
       <div className="w-full flex flex-col gap-4 mt-8">
         {mails?.map((mail) => (
-          <Sheet>
+          <Sheet key={mail.id}>
             <SheetTrigger>
               <Card className="w-full max-h-[200px] overflow-hidden text-left">
                 <div className="flex items-center justify-between">

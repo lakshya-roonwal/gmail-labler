@@ -23,7 +23,7 @@ const UserInfo: FC<UserInfoProps> = ({user}) => {
         </div>
       </div>
       <div>
-        <Button onClick={signOut}>Logout</Button>
+        <Button onClick={()=>{signOut()}}>Logout</Button>
       </div>
     </div>
   );
