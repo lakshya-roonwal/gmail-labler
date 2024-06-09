@@ -1,14 +1,9 @@
 import { google } from 'googleapis';
 import { OAuth2Client } from 'google-auth-library';
 import { auth, EnrichedSession } from '@/auth';
+import { decodeBase64,getBody } from '@/lib/helpers';
 
-// Base64 decoding function
-function decodeBase64(base64: string): string {
-  let decodedString = Buffer.from(base64, 'base64').toString('utf-8');
-  return decodedString;
-}
-
-async function getMessage(auth, messageId) {
+async function getMessage(auth:any, messageId:string) {
   const gmail = google.gmail({ version: 'v1', auth });
   const res = await gmail.users.messages.get({
       userId: 'me',
@@ -41,20 +36,6 @@ async function getMessage(auth, messageId) {
       subject: subject,
       body: plainText,
   };
-}
-
-function getBody(parts) {
-  let body = '';
-  for (let part of parts) {
-      if (part.mimeType === 'text/plain' && part.body && part.body.data) {
-          body = part.body.data;
-          break;
-      }
-      if (part.parts) {
-          body = getBody(part.parts);
-      }
-  }
-  return body;
 }
 
 export async function GET(request: Request) {
@@ -107,7 +88,7 @@ export async function GET(request: Request) {
   // Use for...of loop to handle asynchronous operations
   for (const message of messages) {
       try {
-          const messageDetails = await getMessage(oauth2Client, message.id);
+          const messageDetails = await getMessage(oauth2Client, message.id as string);
           messagesWithBody.push(messageDetails);
       } catch (err) {
           console.error(`Error fetching message with ID ${message.id}:`, err);

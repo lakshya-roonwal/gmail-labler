@@ -11,7 +11,6 @@ interface LabelerPageProps {
 const LabelerPage: FC<LabelerPageProps> = ({user}) => {
   
   const [mails, setMails] = useState(JSON.parse(localStorage.getItem('emails')))
-  const [openAIKey, setOpenAIKey] = useState(localStorage.getItem('openaikey'))
 
   const classifyEmails = async () => {
     const apiKey = localStorage.getItem('openaikey');
@@ -28,7 +27,7 @@ const LabelerPage: FC<LabelerPageProps> = ({user}) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ emails:mails,apiKey:apiKey }),
+        body: JSON.stringify({ emails:mails}),
       });
 
       if (!response.ok) {
@@ -37,6 +36,7 @@ const LabelerPage: FC<LabelerPageProps> = ({user}) => {
 
       const data = await response.json();
       console.log(data);
+      setMails(data.classifiedEmails)
     } catch (error) {
       console.error("Error classifying emails:", error);
     }
